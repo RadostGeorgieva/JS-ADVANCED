@@ -1,0 +1,12 @@
+section {
+    background-color: #DDDD;
+    border: 1px solid black
+}
+.center {
+    text-align: center;
+    border: 1px black;
+    
+}
+ol {
+    color:darkred;
+}
