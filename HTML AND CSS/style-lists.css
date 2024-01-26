@@ -1,0 +1,13 @@
+span > h1 {
+    color: white;
+    background-color: #3B516B;
+    border-radius: 10px;
+    padding: 10px;
+    text-decoration: underline;
+
+}
+section {
+    background-color: #EDEDED;
+    padding: 10px;
+    letter-spacing: 1px;
+} 

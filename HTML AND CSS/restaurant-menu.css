@@ -1,0 +1,19 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+
+section {
+    text-align: center;
+}
+h1 {
+    font-family: "Times New Roman";
+    font-weight: normal;
+    color: #8C8485;
+}
+
+.subtitle{
+    color: #B7C9D9;
+    font-style: italic;
+    font-weight: bold;
+    font-family: "Montserrat";
+}
