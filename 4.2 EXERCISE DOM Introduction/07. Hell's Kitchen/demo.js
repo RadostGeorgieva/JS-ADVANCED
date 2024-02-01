@@ -1,11 +1,7 @@
-function solve(){
-   document.querySelector('#btnSend').addEventListener('click', onClick);
-   const textAreaRef = document.querySelector("textarea");
+function onClick() {
 
-   function onClick() {
-    let data = JSON.parse(textAreaRef.value);
-    debugger
-      let restaurants = {};
+    let data = ["PizzaHut - Peter 500, George 300, Mark 800", "TheLake - Bob 1300, Joe 780, Jane 660"]
+    let restaurants = {};
     for (let el of data) {
         let [restaurantName, workerData] = el.split(" - ");
         let workers = workerData.split(", ");
@@ -77,5 +73,6 @@ function solve(){
    bestR.querySelector("p").textContent = calculateBiggest(restaurants);
    let workersID = document.getElementById("workers");
    workersID.querySelector("p").textContent = bestWorkers(restaurants);
+
 }
-}
+
