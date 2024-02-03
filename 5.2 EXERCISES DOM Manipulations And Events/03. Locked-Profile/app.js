@@ -22,6 +22,7 @@ function lockedProfile() {
             else {
                 hiddenData.style.display = "none";
                 event.target.textContent = "Show more";
+                  
             }
         }
 
