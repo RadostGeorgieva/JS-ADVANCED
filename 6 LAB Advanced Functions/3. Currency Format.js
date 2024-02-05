@@ -9,6 +9,7 @@ function createFormatter (separator, symbol, symbolFirst, formatter) {
 }
 function currencyFormatter(separator, symbol, symbolFirst, value) {
 
+    
     let result = Math.trunc(value) + separator;
     
     result += value.toFixed(2).substr(-2,2);
