@@ -13,59 +13,40 @@ function solve() {
         if (taskName.value == "" || description.value == "" || dueDate.value == "") {
             return;
         }
+        //creating article and putting it in OPEN section
         let article = createArticle();
-        appendToSectionOrange(article, open);
-        //handling OPEN SECTION        let articlesInOpen = open.querySelectorAll("article");
-        for (a of articlesInOpen) {
-
-            let startButton = a.querySelector("button.green");
-            startButton.addEventListener("click", function (event) {
-                console.log("does it come from here");
-                addTappendToSectionYellow(event, a);
-            })
-            let deleteBtn = a.querySelector("button.red");
-            deleteBtn.addEventListener("click", function (event) {
-                deleteHandling(event, a);
-            })
-
-        }
-        //handling IN PROGRESS SECTION
-        let allOpenArticlesInYellow = inProgress.querySelectorAll("article");;
-        for (a of allOpenArticlesInYellow) {
-            let deleteButton = a.querySelector("button.red");
-            deleteButton.addEventListener("click", function (event) {
-
-                deleteHandling(event, a);
-            })
-            let finishButton = a.querySelector("button.orange");
-            finishButton.addEventListener("click", function (event) {
-
-                appendToSectionGreen(event, a);
-            })
-        }
-
-
+        let divs = open.children;
+        divs[1].appendChild(article);
+        let allB = article.querySelectorAll("button");;
+        addEventListenerToButtons(allB);
+    }
+    //handling OPEN SECTION 
+    function addEventListenerToButtons(allB){
+        Array.from(allB).forEach(btn => btn.addEventListener("click", handlingButtons))
     }
 
 
     function createArticle() {
-
+        if (taskName.value == "" || description.value == "" || dueDate.value == "") {
+            return;
+        }
         let article = document.createElement("article")
-
+        //adding header
         let h3 = document.createElement("h3");
         h3.textContent = taskName.value;
         article.appendChild(h3);
         taskName.value = "";
-
+        //adding description
         let pDescription = document.createElement("p");
         pDescription.textContent = "Description: " + description.value;
         article.appendChild(pDescription);
         description.value = "";
-
+        //adding date
         let pDueDate = document.createElement("p");
         pDueDate.textContent = "Due Date: " + dueDate.value;
         article.appendChild(pDueDate);
         dueDate.value = "";
+        //adding buttons
         let buttonDiv = document.createElement("div");
         buttonDiv.classList.add("flex");
         let startButton = document.createElement("button");
@@ -80,39 +61,40 @@ function solve() {
         return article;
 
     }
-    function appendToSectionOrange(article, open) {
-        open.appendChild(article);
-    }
 
-    function addTappendToSectionYellow(event, a) {
-
-        let buttonToDeleteRed = a.querySelector("button.green");
-        buttonToDeleteRed.classList.remove("green");
-        buttonToDeleteRed.classList.add("red");
-        buttonToDeleteRed.textContent = "Delete";
-
-        let buttonToFinishOrange = a.querySelector("button.red");
-        buttonToFinishOrange.classList.remove("red");
-        buttonToFinishOrange.classList.add("orange");
-        buttonToFinishOrange.textContent = "Finish";
-        inProgress.appendChild(a);
-
-
-    }
-
-    function deleteHandling(event, a) {
+    function handlingButtons(event) {
+        event.stopPropagation();
         debugger
-        (event.target.parentElement.parentElement).remove();
+        let currentButton = event.target
+        let article = currentButton.parentElement.parentElement;
+        console.log(article);
+        //handling change FROM OPEN to in progress
+        if (currentButton.textContent == "Start") {
+            //changing the red button
+            let redbutton = article.getElementsByClassName("red");
+            redbutton[0].textContent = "Finish";
+            redbutton[0].classList.add("orange");
+            redbutton[0].classList.remove("red");
+            //changing the green button
+            currentButton.classList.remove("green");
+            currentButton.classList.add("red");
+            currentButton.textContent = "Delete";
 
-    }
+            //changing location of article
+            let divs = inProgress.children;
+            divs[1].removeAttribute('id');
+            divs[1].appendChild(article);
 
-    function appendToSectionGreen(event, a) {
-        let divsInArticle = complete.children
-        let buttonToDeleteRed = a.querySelector("button.red");
-        buttonToDeleteRed.remove();
-        let buttonToDeleteOrange = a.querySelector("button.orange");
-        buttonToDeleteOrange.remove();
-        divsInArticle[1].appendChild(a);
-
+            //deleting the article
+        } else if (currentButton.textContent == "Delete") {
+            article.remove();
+            ///handling change FROM IN PROGRESS to COMPLETE
+        } else if (currentButton.textContent == "Finish") {
+            //removing DIV containig buttons
+            currentButton.parentElement.remove();
+            //changing location of article
+            let divs = complete.children;
+            divs[1].appendChild(article);
+        }
     }
 }
