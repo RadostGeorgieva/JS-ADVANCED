@@ -19,3 +19,4 @@ describe('Suite', function() {
         expect(sum([1])).to.equal(1);
     })
 });
+
