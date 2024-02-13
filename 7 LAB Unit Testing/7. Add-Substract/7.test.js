@@ -9,7 +9,7 @@ describe('Suite', function () {
         counter = createCalculator();
     });
 
-    it('beggins at 0', () => {
+    it('begins at 0', () => {
         expect(counter.get()).to.equal(0);
     })
     it('removes correctly a number', function () {
