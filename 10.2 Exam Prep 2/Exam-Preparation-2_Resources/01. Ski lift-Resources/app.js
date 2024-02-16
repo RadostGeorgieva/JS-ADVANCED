@@ -22,6 +22,7 @@ function solve() {
 
             let liElement = document.createElement("li");
             liElement.classList.add("ticket");
+            liElement.classList.remove("ticket");
             let article = document.createElement("article");
             let name = document.createElement("h3");
             let pDate = document.createElement("p");
