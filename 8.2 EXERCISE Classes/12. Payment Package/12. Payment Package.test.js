@@ -1,6 +1,6 @@
 // test.js
 import { expect, assert } from 'chai';
-import { PaymentPackage } from './PaymentPackage.js'; // Importing PaymentPackage
+import {findNewApartment}
 
 describe('setters and getters', function () {
     let testPackage; // Declare testPackage variable outside of individual tests
